@@ -14,8 +14,6 @@ public class User {
 	private String userName;
 	private String userEmail;
 	private String userPassword;
-//	private Date createAt;
-//	private Date updateAt;
 	private Timestamp createAt;
 	private Timestamp updateAt;
 	
@@ -46,15 +44,6 @@ public class User {
 	public Date getCreateAt() {
 		return createAt;
 	}
-//	public void setCreateAt(Date createAt) {
-//		this.createAt = createAt;
-//	}
-//	public Date getUpdateAt() {
-//		return updateAt;
-//	}
-//	public void setUpdateAt(Date updateAt) {
-//		this.updateAt = updateAt;
-//	}
 	public Timestamp getUpdateAt() {
 		return updateAt;
 	}
@@ -70,13 +59,5 @@ public class User {
 		return "User [userId=" + userId + ", userName=" + userName + ", userEmail=" + userEmail + ", userPassword="
 				+ userPassword + ", createAt=" + createAt + ", updateAt=" + updateAt + "]";
 	}
-	
-//	@Override
-//	public String toString() {
-//		return "User [userId=" + userId + ", userName=" + userName + ", userEmail=" + userEmail + ", userPassword="
-//				+ userPassword + ", createAt=" + createAt + ", updateAt=" + updateAt + "]";
-//	}
-	
-	
-	
+		
 }
