@@ -13,7 +13,19 @@
 		<result property="updateAt" column="update_at"/>
 	</resultMap>
 	
-	<!-- 全件検索 -->
+	<!-- ユーザー登録 -->
+	<insert id="insertUser">
+		INSERT INTO users (
+			user_name,
+			user_email,
+			user_password)
+		VALUES (
+		#{userName},
+		#{userEmail},
+		#{userPassword});
+	</insert>
+	
+	<!-- ユーザー情報の全件検索 -->
 	<select id="findAll" resultMap="userMapper">
 		SELECT
 			user_id,
@@ -27,5 +39,56 @@
 		ORDER BY
 			user_id;
 	</select>
-
+	
+	<!-- 取得したidと一致するユーザー情報の取得 -->
+	<select id="findById" resultMap="userMapper">
+		SELECT
+			user_id,
+			user_name,
+			user_email,
+			user_password,
+			create_at,
+			update_at
+		FROM
+			users
+		WHERE
+			user_id = #{userId}
+		</select>
+	
+	<!-- 取得したメールアドレスとパスワードに一致するユーザー情報の取得 -->
+	<select id="findByEmailAndPassword" resultMap="userMapper">
+		SELECT
+			user_id,
+			user_name,
+			user_email,
+			user_password,
+			create_at,
+			update_at
+		FROM
+			users
+		WHERE
+			user_email = #{userEmail}
+		AND
+			user_password = #{userPassword};
+	</select>
+	
+	<!-- ユーザー情報の更新 -->
+	<update id="updateUser">
+		UPDATE
+			users
+		<set>
+			<if test="userName != null">
+				user_name = #{userName},
+			</if>
+			<if test="userEmail != null">
+				user_email = #{userEmail},
+			</if>
+			<if test="userPassword != null">
+				user_password = #{userPassword}
+			</if>
+		</set>
+		WHERE
+			user_id = #{userId};
+	</update>
+	
 </mapper>
