@@ -25,7 +25,7 @@
 		#{userPassword});
 	</insert>
 	
-	<!-- ユーザー情報の全件検索 -->
+	<!-- ユーザー情報の全件取得 -->
 	<select id="findAll" resultMap="userMapper">
 		SELECT
 			user_id,
