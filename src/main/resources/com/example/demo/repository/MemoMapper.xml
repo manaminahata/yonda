@@ -49,6 +49,6 @@
 		SET
 			memo_body = #{memoBody}
 		WHERE
-			memo_id = #{id};
+			memo_id = #{memoId};
 	</update>
 </mapper>
