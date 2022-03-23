@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.MemoMapper">
+	
+	<resultMap type="com.example.demo.domain.Memo" id="memoMapper">
+		<id property="memoId" column="memo_id"/>
+		<result property="memoBody" column="memo_body"/>
+		<result property="memoBookId" column="memo_book_id"/>
+		<result property="createAt" column="create_at"/>
+		<result property="updateAt" column="update_at"/>
+	</resultMap>
+	
+	<!-- 読書メモ登録 -->
+	<insert id="insertMemo">
+		INSERT INTO memo (
+			memo_body,
+			memo_book_id)
+		VALUES(
+			#{memoBody},
+			#{memoBookId});
+	</insert>
+	
+	<!-- メモの全件取得 -->
+	<select id="findAll" resultMap="memoMapper">
+		SELECT
+			m.memo_book_id,
+			b.book_name,
+			m.memo_id,
+			m.memo_body,
+			m.create_at,
+			m.update_at
+		FROM
+			memo AS m
+		JOIN
+			books AS b
+		ON
+			b.book_id = m.memo_book_id
+		ORDER BY
+			m.memo_book_id,
+			m.create_at;
+	</select>
+	
+	<!-- メモの更新 -->
+	<update id="updateMemo">
+		UPDATE
+			memo
+		SET
+			memo_body = #{memoBody}
+		WHERE
+			memo_id = #{id};
+	</update>
+</mapper>
