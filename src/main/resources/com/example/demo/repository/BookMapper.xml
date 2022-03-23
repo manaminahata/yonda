@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.BookMapper">
+
+	<resultMap type="com.example.demo.domain.Book" id="bookMapper">
+		<id property="bookId" column="book_id"/>
+		<result property="bookName" column="book_name"/>
+		<result property="bookCategoryId" column="book_category_id"/>
+		<result property="bookPrice" column="book_price"/>
+		<result property="bookPage" column="book_page"/>
+		<result property="bookCurrentPage" column="book_current_page"/>
+		<result property="bookImage" column="book_image"/>
+		<result property="bookUserId" column="book_user_id"/>
+		<result property="createAt" column="create_at"/>
+		<result property="updateAt" column="update_at"/>
+	</resultMap>
+
+	<!-- 書籍登録 -->
+	<insert id="insertBook">
+		INSERT INTO books (
+			book_name,
+			book_category_id,
+			book_price,
+			book_page,
+			book_current_page,
+			book_image,
+			book_user_id)
+		VALUES (
+			#{bookName},
+			#{bookCategoryId},
+			#{bookPrice},
+			#{bookPage},
+			#{bookCurrentPage},
+			#{bookImage},
+			#{bookUserId});
+	</insert>
+	
+	<!-- 書籍情報の全件取得（全ユーザーの書籍情報） -->
+	<select id="findAll" resultMap="bookMapper">
+		SELECT
+			b.book_id,
+			b.book_name,
+			b.book_price,
+			b.book_page,
+			b.book_current_page,
+			b.book_image,
+			b.book_category_id,
+			c.category_name,
+			b.book_user_id,
+			u.user_name,
+			b.create_at,
+			b.update_at
+		FROM
+			books AS b
+		JOIN
+			categories AS c
+		ON
+			b.book_category_id = c.category_id
+		JOIN
+			users AS u
+		ON
+			b.book_user_id = u.user_id
+		ORDER BY
+			book_id;
+	</select>
+	
+	<!-- 特定ユーザーの書籍情報を全件取得 -->
+	<select id="findByOne" resultMap="bookMapper">
+		SELECT
+			b.book_id,
+			b.book_name,
+			b.book_price,
+			b.book_page,
+			book_current_page,
+			b.book_image,
+			b.book_category_id,
+			c.category_name,
+			b.book_user_id,
+			u.user_name,
+			b.create_at,
+			b.update_at
+		FROM
+			books AS b
+		JOIN
+			categories AS c
+		ON
+			b.book_category_id = c.category_id
+		JOIN
+			users AS u
+		ON
+			b.book_user_id = u.user_id
+		WHERE
+			b.book_user_id = #{bookUserId}
+		ORDER BY
+			book_id;
+	</select>
+	
+	<!-- 特定ユーザーの中から書籍idが一致する書籍情報の取得 -->
+	<select id="findById" resultMap="bookMapper">
+		SELECT
+			b.book_id,
+			b.book_name,
+			b.book_price,
+			b.book_page,
+			book_current_page,
+			b.book_image,
+			b.book_category_id,
+			c.category_name,
+			b.book_user_id,
+			u.user_name,
+			b.create_at,
+			b.update_at
+		FROM
+			books AS b
+		JOIN
+			categories AS c
+		ON
+			b.book_category_id = c.category_id
+		JOIN
+			users AS u
+		ON
+			b.book_user_id = u.user_id
+		WHERE
+			b.book_user_id = #{bookUserId}
+		AND
+			b.book_id = #{bookId}
+		ORDER BY
+			book_id;
+	</select>
+	
+	<!-- 書籍名が一致する情報の取得 -->
+	<select id="findByName" resultMap="bookMapper">
+		SELECT
+			b.book_id,
+			b.book_name,
+			b.book_price,
+			b.book_page,
+			book_current_page,
+			b.book_image,
+			b.book_category_id,
+			c.category_name,
+			b.book_user_id,
+			u.user_name,
+			b.create_at,
+			b.update_at
+		FROM
+			books AS b
+		JOIN
+			categories AS c
+		ON
+			b.book_category_id = c.category_id
+		JOIN
+			users AS u
+		ON
+			b.book_user_id = u.user_id
+		WHERE
+			b.book_user_id = #{bookUserId}
+		AND
+			b.book_name LIKE '%${bookName}%'
+		ORDER BY
+			book_id;
+	</select>
+	
+	<!-- 書籍情報の更新 -->
+	<update id="updateBook">
+		UPDATE
+			books
+		<set>
+			<if test="bookName != null">
+				book_name = #{bookName},
+			</if>
+			<if test="bookCategoryId != null">
+				book_category_id = #{bookCategoryId},
+			</if>
+			<if test="bookPrice != null">
+				book_price = #{bookPrice},
+			</if>
+			<if test="bookImage != null">
+				book_image = #{bookImage},
+			</if>
+			<if test="bookCurrentPage != null">
+				book_current_page = #{bookCurrentPage}
+			</if>
+		</set>
+		WHERE
+			book_id = #{bookId}
+		AND
+			book_user_id = #{bookUserId};
+	</update>
+</mapper>

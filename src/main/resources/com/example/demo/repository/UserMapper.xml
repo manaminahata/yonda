@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.UserMapper">
+
+	<resultMap type="com.example.demo.domain.User" id="userMapper">
+		<id property="userId" column="user_id"/>
+		<result property="userName" column="user_name"/>
+		<result property="userEmail" column="user_email"/>
+		<result property="userPassword" column="user_password"/>
+		<result property="createAt" column="create_At"/>
+		<result property="updateAt" column="update_at"/>
+	</resultMap>
+	
+	<!-- ユーザー登録 -->
+	<insert id="insertUser">
+		INSERT INTO users (
+			user_name,
+			user_email,
+			user_password)
+		VALUES (
+		#{userName},
+		#{userEmail},
+		#{userPassword});
+	</insert>
+	
+	<!-- ユーザー情報の全件取得 -->
+	<select id="findAll" resultMap="userMapper">
+		SELECT
+			user_id,
+			user_name,
+			user_email,
+			user_password,
+			create_at,
+			update_at
+		FROM
+			users
+		ORDER BY
+			user_id;
+	</select>
+	
+	<!-- 取得したidと一致するユーザー情報の取得 -->
+	<select id="findById" resultMap="userMapper">
+		SELECT
+			user_id,
+			user_name,
+			user_email,
+			user_password,
+			create_at,
+			update_at
+		FROM
+			users
+		WHERE
+			user_id = #{userId}
+		</select>
+	
+	<!-- 取得したメールアドレスとパスワードに一致するユーザー情報の取得 -->
+	<select id="findByEmailAndPassword" resultMap="userMapper">
+		SELECT
+			user_id,
+			user_name,
+			user_email,
+			user_password,
+			create_at,
+			update_at
+		FROM
+			users
+		WHERE
+			user_email = #{userEmail}
+		AND
+			user_password = #{userPassword};
+	</select>
+	
+	<!-- ユーザー情報の更新 -->
+	<update id="updateUser">
+		UPDATE
+			users
+		<set>
+			<if test="userName != null">
+				user_name = #{userName},
+			</if>
+			<if test="userEmail != null">
+				user_email = #{userEmail},
+			</if>
+			<if test="userPassword != null">
+				user_password = #{userPassword}
+			</if>
+		</set>
+		WHERE
+			user_id = #{userId};
+	</update>
+	
+</mapper>

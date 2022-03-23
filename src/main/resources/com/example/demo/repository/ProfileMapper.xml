@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.ProfileMapper">
+	
+	<resultMap type="com.example.demo.domain.Profile" id="profileMapper">
+		<id property="profileId" column="profile_id"/>
+		<result property="profilePic" column="profile_pic"/>
+		<result property="profileUserId" column="profile_user_id"/>
+		<result property="createAt" column="create_at"/>
+		<result property="updateAt" column="update_at"/>
+	</resultMap>
+	
+	<!-- プロフィール画像の登録 -->
+	<insert id="insertProfile">
+		INSERT INTO profile (
+			profile_pic,
+			profile_user_id)
+		VALUES (
+			#{profilePic},
+			#{profileUserId});
+	</insert>
+	
+	<!-- プロフィール画像の全件取得（おそらく使用用途はほとんどなし） -->
+	<select id="findAll" resultMap="profileMapper">
+		SELECT
+			p.profile_user_id,
+			u.user_name,
+			p.profile_id,
+			p.profile_pic,
+			p.create_at,
+			p.update_at
+		FROM
+			profile AS p
+		JOIN
+			users AS u
+		ON
+			p.profile_user_id = u.user_id
+		ORDER BY
+			p.update_at DESC,
+			p.profile_user_id;
+	</select>
+	
+	<!-- プロフィール画像の更新 -->
+	<update id="updateProfile">
+		UPDATE
+			profile
+		SET
+			profile_pic = #{profilePic}
+		WHERE
+			profile_user_id = #{profileUserId};
+	</update>
+	
+</mapper>
