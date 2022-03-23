@@ -15,7 +15,7 @@ public class Book {
 	private Integer bookCategoryId;
 	private Integer bookPrice;
 	private Integer bookPage;
-//	private Blob bookImage;
+	private Integer bookCurrentPage;
 	private String bookImage;
 	private Integer bookUserId;
 	private Timestamp createAt;
@@ -51,12 +51,18 @@ public class Book {
 	public void setBookPage(Integer bookPage) {
 		this.bookPage = bookPage;
 	}
-//	public Blob getBookImage() {
-//		return bookImage;
-//	}
-//	public void setBookImage(Blob bookImage) {
-//		this.bookImage = bookImage;
-//	}
+	public Integer getBookCurrentPage() {
+		return bookCurrentPage;
+	}
+	public void setBookCurrentPage(Integer bookCurrentPage) {
+		this.bookCurrentPage = bookCurrentPage;
+	}
+	public String getBookImage() {
+		return bookImage;
+	}
+	public void setBookImage(String bookImage) {
+		this.bookImage = bookImage;
+	}
 	public Integer getBookUserId() {
 		return bookUserId;
 	}
@@ -75,26 +81,13 @@ public class Book {
 	public void setUpdateAt(Timestamp updateAt) {
 		this.updateAt = updateAt;
 	}
-	public String getBookImage() {
-		return bookImage;
-	}
-	public void setBookImage(String bookImage) {
-		this.bookImage = bookImage;
-	}
 	
 	@Override
 	public String toString() {
 		return "Book [bookId=" + bookId + ", bookName=" + bookName + ", bookCategoryId=" + bookCategoryId
-				+ ", bookPrice=" + bookPrice + ", bookPage=" + bookPage + ", bookImage=" + bookImage + ", bookUserId="
-				+ bookUserId + ", createAt=" + createAt + ", updateAt=" + updateAt + "]";
+				+ ", bookPrice=" + bookPrice + ", bookPage=" + bookPage + ", bookCurrentPage=" + bookCurrentPage
+				+ ", bookImage=" + bookImage + ", bookUserId=" + bookUserId + ", createAt=" + createAt + ", updateAt="
+				+ updateAt + "]";
 	}
-	
-//	@Override
-//	public String toString() {
-//		return "Book [bookId=" + bookId + ", bookName=" + bookName + ", bookCategoryId=" + bookCategoryId
-//				+ ", bookPrice=" + bookPrice + ", bookPage=" + bookPage + ", bookImage=" + bookImage + ", bookUserId="
-//				+ bookUserId + ", createAt=" + createAt + ", updateAt=" + updateAt + "]";
-//	}
-	
 	
 }

@@ -10,6 +10,7 @@
 		<result property="bookCategoryId" column="book_category_id"/>
 		<result property="bookPrice" column="book_price"/>
 		<result property="bookPage" column="book_page"/>
+		<result property="bookCurrentPage" column="book_current_page"/>
 		<result property="bookImage" column="book_image"/>
 		<result property="bookUserId" column="book_user_id"/>
 		<result property="createAt" column="create_at"/>
@@ -23,6 +24,7 @@
 			book_category_id,
 			book_price,
 			book_page,
+			book_current_page,
 			book_image,
 			book_user_id)
 		VALUES (
@@ -30,6 +32,7 @@
 			#{bookCategoryId},
 			#{bookPrice},
 			#{bookPage},
+			#{bookCurrentPage},
 			#{bookImage},
 			#{bookUserId});
 	</insert>
@@ -41,6 +44,7 @@
 			b.book_name,
 			b.book_price,
 			b.book_page,
+			b.book_current_page,
 			b.book_image,
 			b.book_category_id,
 			c.category_name,
@@ -69,6 +73,7 @@
 			b.book_name,
 			b.book_price,
 			b.book_page,
+			book_current_page,
 			b.book_image,
 			b.book_category_id,
 			c.category_name,
@@ -99,6 +104,7 @@
 			b.book_name,
 			b.book_price,
 			b.book_page,
+			book_current_page,
 			b.book_image,
 			b.book_category_id,
 			c.category_name,
@@ -131,6 +137,7 @@
 			b.book_name,
 			b.book_price,
 			b.book_page,
+			book_current_page,
 			b.book_image,
 			b.book_category_id,
 			c.category_name,
@@ -172,6 +179,9 @@
 			</if>
 			<if test="bookImage != null">
 				book_image = #{bookImage},
+			</if>
+			<if test="bookCurrentPage != null">
+				book_current_page = #{bookCurrentPage}
 			</if>
 		</set>
 		WHERE
