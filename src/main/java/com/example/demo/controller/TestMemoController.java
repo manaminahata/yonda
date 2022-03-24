@@ -15,18 +15,18 @@
 //	@Autowired
 //	private MemoMapper memoMapper;
 //	
-////	@RequestMapping("/insertMemo")
-////	public String insertMemo() {
-////		Memo memo = new Memo();
-////		memo.setMemoBookId(4);
-////		memo.setMemoBody("メモの追加テスト");
-////		memoMapper.insertMemo(memo);
-////		
-////		System.out.println("insertMemo：");
-////		System.out.println(memoMapper.findAll());
-////		
-////		return "OK";
-////	}
+//	@RequestMapping("/insertMemo")
+//	public String insertMemo() {
+//		Memo memo = new Memo();
+//		memo.setMemoBookId(4);
+//		memo.setMemoBody("メモの追加テスト");
+//		memoMapper.insertMemo(memo);
+//		
+//		System.out.println("insertMemo：");
+//		System.out.println(memoMapper.findAll());
+//		
+//		return "OK";
+//	}
 //	
 //	@RequestMapping("/updateMemo")
 //	public String updateMemo() {
