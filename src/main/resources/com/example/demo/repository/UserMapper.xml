@@ -9,7 +9,7 @@
 		<result property="userName" column="user_name"/>
 		<result property="userEmail" column="user_email"/>
 		<result property="userPassword" column="user_password"/>
-		<result property="createAt" column="create_At"/>
+		<result property="createAt" column="create_at"/>
 		<result property="updateAt" column="update_at"/>
 	</resultMap>
 	
@@ -20,9 +20,9 @@
 			user_email,
 			user_password)
 		VALUES (
-		#{userName},
-		#{userEmail},
-		#{userPassword});
+			#{userName},
+			#{userEmail},
+			#{userPassword});
 	</insert>
 	
 	<!-- ユーザー情報の全件取得 -->

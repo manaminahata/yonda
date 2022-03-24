@@ -1,10 +1,13 @@
 package com.example.demo.domain;
 
-import java.sql.Timestamp;
 import java.util.Date;
 
 /**
  * usersテーブルのためのドメインクラス
+ * @author manami
+ *
+ */
+/**
  * @author manami
  *
  */
@@ -14,8 +17,8 @@ public class User {
 	private String userName;
 	private String userEmail;
 	private String userPassword;
-	private Timestamp createAt;
-	private Timestamp updateAt;
+	private Date createAt;
+	private Date updateAt;
 	
 	public Integer getUserId() {
 		return userId;
@@ -44,14 +47,14 @@ public class User {
 	public Date getCreateAt() {
 		return createAt;
 	}
-	public Timestamp getUpdateAt() {
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+	public Date getUpdateAt() {
 		return updateAt;
 	}
-	public void setUpdateAt(Timestamp updateAt) {
+	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
-	}
-	public void setCreateAt(Timestamp createAt) {
-		this.createAt = createAt;
 	}
 	
 	@Override
@@ -59,5 +62,5 @@ public class User {
 		return "User [userId=" + userId + ", userName=" + userName + ", userEmail=" + userEmail + ", userPassword="
 				+ userPassword + ", createAt=" + createAt + ", updateAt=" + updateAt + "]";
 	}
-		
+	
 }
