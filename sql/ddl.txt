@@ -15,7 +15,8 @@ DROP table if exists books;
 DROP table if exists memo;
 DROP table if exists like_books;
 DROP table if exists deleted_users;
-DROP table if exists deleted_books ;
+DROP table if exists deleted_books;
+DROP table if exists deleted_memo;
 
 -- 外部キー制約を元に戻す
 set foreign_key_checks = 1;
