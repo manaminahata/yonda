@@ -30,7 +30,7 @@ public class UserRegistrationController {
 	 * @return
 	 */
 	@RequestMapping("/user-registration")
-	public String userRegistration() {
+	public String registrationUser() {
 		return "user-registration";
 	}
 	
@@ -39,7 +39,7 @@ public class UserRegistrationController {
 	 * @return
 	 */
 	@RequestMapping("user-registration-result")
-	public String userRegister(@Validated UserRegistrationForm form, BindingResult result, Model model) {
+	public String registerUser(@Validated UserRegistrationForm form, BindingResult result, Model model) {
 		
 		// formで設定した入力値チェック
 		if (result.hasErrors()) {
@@ -71,7 +71,7 @@ public class UserRegistrationController {
 	 * @return
 	 */
 	@RequestMapping("/confirm")
-	public String confirm() {
+	public String confirmUser() {
 		return "user-confirm";
 	}
 
