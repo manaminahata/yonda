@@ -13,6 +13,11 @@ import com.example.demo.domain.User;
 import com.example.demo.form.UserLoginForm;
 import com.example.demo.service.UserLoginService;
 
+/**
+ * ユーザーのログイン・ログアウト認証を行うコントローラークラス
+ * @author manami
+ *
+ */
 @Controller
 @RequestMapping("/yonda")
 public class UserLoginController {

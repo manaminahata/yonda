@@ -6,6 +6,11 @@ import org.springframework.stereotype.Service;
 import com.example.demo.domain.User;
 import com.example.demo.repository.UserMapper;
 
+/**
+ * ユーザーのログイン・ログアウトを行うサービスクラス
+ * @author manami
+ *
+ */
 @Service
 public class UserLoginService {
 
