@@ -17,8 +17,8 @@ html,body {  height: 100%;}body {  display: flex;  align-items: center;  padding
 
 <body class="text-center">
   <main class="form-signin">
-    <form method="post" th:action="@{/yonda/login-result}" th:object="${userLoginForm}">
-      <img class="mb w-100 h-100" src="/img/yonda-logo.png" alt="YONDA?">
+    <form method="post" th:action="@{/yonda/user-login-result}" th:object="${userLoginForm}">
+      <img class="mb w-100 h-100" src="/img/set-up/yonda-logo.png" alt="YONDA?">
       <h1 class="h3 mb-3 fw-normal text-muted">ログイン</h1>
       <label th:if="${errorMessage}" class="control-label" style="color:red" for="inputError" th:text="${errorMessage}">ERROR</label>
       <div class="form-floating">
@@ -39,7 +39,7 @@ html,body {  height: 100%;}body {  display: flex;  align-items: center;  padding
       <button class="btn btn-success" type="submit">ログイン</button>
    </form>
    <br>
-   <a href="" th:href="@{/yonda/sign-up}" class="text-decoration-none link-secondary">初めての方はこちら>>></a>
+   <a href="" th:href="@{/yonda/user-registration}" class="text-decoration-none link-secondary">初めての方はこちら>>></a>
    <p class="mt-5 mb-3 text-muted">© Book Manager</p>
   </main>
 
