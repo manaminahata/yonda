@@ -19,6 +19,11 @@ import com.example.demo.domain.User;
 import com.example.demo.form.BookRegistrationForm;
 import com.example.demo.service.BookRegistrationService;
 
+/**
+ * 書籍登録を行うコントローラークラス
+ * @author manami
+ *
+ */
 @Controller
 @RequestMapping("/yonda")
 public class BookRegistrationController {
