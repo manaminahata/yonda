@@ -24,16 +24,12 @@
 			book_category_id,
 			book_price,
 			book_page,
-			book_current_page,
-			book_image,
 			book_user_id)
 		VALUES (
 			#{bookName},
 			#{bookCategoryId},
 			#{bookPrice},
 			#{bookPage},
-			#{bookCurrentPage},
-			#{bookImage},
 			#{bookUserId});
 	</insert>
 	
