@@ -81,7 +81,7 @@ public class Book {
 	public void setUpdateAt(Timestamp updateAt) {
 		this.updateAt = updateAt;
 	}
-	
+		
 	@Override
 	public String toString() {
 		return "Book [bookId=" + bookId + ", bookName=" + bookName + ", bookCategoryId=" + bookCategoryId
@@ -89,5 +89,4 @@ public class Book {
 				+ ", bookImage=" + bookImage + ", bookUserId=" + bookUserId + ", createAt=" + createAt + ", updateAt="
 				+ updateAt + "]";
 	}
-	
 }
