@@ -1,8 +1,12 @@
 package com.example.demo.form;
 
+
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class BookRegistrationForm {
 	
@@ -13,7 +17,7 @@ public class BookRegistrationForm {
 	private Integer bookPrice;
 	@Positive(message = "ページ数を入力してください")
 	private Integer bookPage;
-	private String bookImg;
+	private MultipartFile bookImg;
 	
 	public String getBookName() {
 		return bookName;
@@ -39,10 +43,10 @@ public class BookRegistrationForm {
 	public void setBookPage(Integer bookPage) {
 		this.bookPage = bookPage;
 	}
-	public String getBookImg() {
+	public MultipartFile getBookImg() {
 		return bookImg;
 	}
-	public void setBookImg(String bookImg) {
+	public void setBookImg(MultipartFile bookImg) {
 		this.bookImg = bookImg;
 	}
 	
@@ -51,5 +55,5 @@ public class BookRegistrationForm {
 		return "BookRegistrationForm [bookName=" + bookName + ", bookCategoryId=" + bookCategoryId + ", bookPrice="
 				+ bookPrice + ", bookPage=" + bookPage + ", bookImg=" + bookImg + "]";
 	}
-	
+
 }
