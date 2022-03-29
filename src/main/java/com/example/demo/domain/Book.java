@@ -2,7 +2,6 @@ package com.example.demo.domain;
 
 import java.sql.Timestamp;
 
-
 /**
  * booksテーブルのためのドメインクラス
  * @author manami
@@ -16,7 +15,7 @@ public class Book {
 	private Integer bookPrice;
 	private Integer bookPage;
 	private Integer bookCurrentPage;
-	private String bookImage;
+	private String bookImg;
 	private Integer bookUserId;
 	private Timestamp createAt;
 	private Timestamp updateAt;
@@ -57,12 +56,6 @@ public class Book {
 	public void setBookCurrentPage(Integer bookCurrentPage) {
 		this.bookCurrentPage = bookCurrentPage;
 	}
-	public String getBookImage() {
-		return bookImage;
-	}
-	public void setBookImage(String bookImage) {
-		this.bookImage = bookImage;
-	}
 	public Integer getBookUserId() {
 		return bookUserId;
 	}
@@ -81,12 +74,19 @@ public class Book {
 	public void setUpdateAt(Timestamp updateAt) {
 		this.updateAt = updateAt;
 	}
-		
+	public String getBookImg() {
+		return bookImg;
+	}
+	public void setBookImg(String bookImg) {
+		this.bookImg = bookImg;
+	}
+	
 	@Override
 	public String toString() {
 		return "Book [bookId=" + bookId + ", bookName=" + bookName + ", bookCategoryId=" + bookCategoryId
 				+ ", bookPrice=" + bookPrice + ", bookPage=" + bookPage + ", bookCurrentPage=" + bookCurrentPage
-				+ ", bookImage=" + bookImage + ", bookUserId=" + bookUserId + ", createAt=" + createAt + ", updateAt="
+				+ ", bookImg=" + bookImg + ", bookUserId=" + bookUserId + ", createAt=" + createAt + ", updateAt="
 				+ updateAt + "]";
 	}
+	
 }

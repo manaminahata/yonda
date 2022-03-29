@@ -1,5 +1,10 @@
 package com.example.demo.controller;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -13,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.domain.Book;
 import com.example.demo.domain.User;
@@ -62,7 +68,7 @@ public class BookRegistrationController {
 		categoryMap.put(12, "旅行・アウトドア");
 		categoryMap.put(13, "児童書");
 		categoryMap.put(14, "参考書");
-		categoryMap.put(14, "その他");
+		categoryMap.put(15, "その他");
 		
 		model.addAttribute("categoryMap", categoryMap);
 		
@@ -74,13 +80,29 @@ public class BookRegistrationController {
 	 * @return
 	 */
 	@RequestMapping("/book-registration-result")
-	public String registerBook(@Validated BookRegistrationForm form, BindingResult result, Model model) {
-		
-		System.out.println("書籍登録form：");
-		System.out.println(form);
+	public String registerBook(@Validated BookRegistrationForm form, BindingResult result, MultipartFile bookImg, Model model) {
 		
 		if (result.hasErrors()) {
-			return "book-registration";
+			return registrationBook(model);
+		}
+		
+		// ファイル名を取得
+		MultipartFile bookImgName = form.getBookImg();
+		
+		// 格納先のパスを指定
+		Path filePath = Paths.get("/Users/manami/workspace/yonda/books/" + bookImgName);
+		
+		try {
+			// アップロードファイルをバイト値に変換
+			byte[] bytes = bookImg.getBytes();
+			
+			// バイト値を書き込むためのファイルを作成し、指定したパスに格納
+			OutputStream stream = Files.newOutputStream(filePath);
+			
+			// ファイルに書き込み
+			stream.write(bytes);
+		} catch(IOException e) {
+			e.printStackTrace();
 		}
 		
 		Book book = new Book();
@@ -89,6 +111,7 @@ public class BookRegistrationController {
 		// sessionに格納されたユーザーデータを利用し、ユーザーのID情報を取得する
 		User user = (User) session.getAttribute("user");
 		book.setBookUserId(user.getUserId());
+		book.setBookImg(form.getBookImg().toString());
 		
 		model.addAttribute("book", book);
 		bookRegistrationService.insertBook(book);

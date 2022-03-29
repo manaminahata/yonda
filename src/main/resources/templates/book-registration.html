@@ -84,7 +84,7 @@
 <br>
 <!-- 書籍登録フォーム -->
 <h2>書籍登録</h2>
- <form th:action="@{/yonda/book-registration-result}" method="post" th:object="${bookRegistrationForm}">
+ <form th:action="@{/yonda/book-registration-result}" method="post" enctype="multipart/form-data" th:object="${bookRegistrationForm}">
   <div>
    <label for="bookName" class="text-muted">書籍名</label>
    <input id="bookName" type="text" class="form-control" name="bookName" placeholder="例）スッキリわかるJava" th:field="*{bookName}" required>
@@ -107,11 +107,11 @@
    <input id="bookPage" type="text" class="form-control" name="bookPage" placeholder="例）100" th:field="*{bookPage}" required>ページ
    <span th:if="${#fields.hasErrors('bookPrice')}" th:errors="*{bookPrice}" class="text-danger">ERROR!</span>
   </div>
-<!--   <div>
+  <div>
    <label for="bookImg" class="text-muted">イメージ画像</label>
    <input id="bookImg" type="file" class="form-control" name="bookImg" placeholder="書籍のイメージ画像をアップロードしてください" th:field="*{bookImg}" required>
   </div>
- --> 
+
  <button type="submit">登録</button>
 </form>
 
