@@ -60,6 +60,7 @@ CREATE table books (
 	book_price integer,
 	book_page integer not null,
 	book_current_page integer,
+	book_img_name text,
 	book_img mediumblob,
 	book_user_id integer not null,
 	create_at timestamp default current_timestamp,

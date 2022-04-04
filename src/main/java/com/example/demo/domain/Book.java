@@ -1,21 +1,29 @@
 package com.example.demo.domain;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Arrays;
+
+
+import lombok.Data;
 
 /**
  * booksテーブルのためのドメインクラス
  * @author manami
  *
  */
-public class Book {
-
+@Data
+public class Book implements Serializable{
+	
+	private static final long serialVersionUID = -2921497769927755763L;
 	private Integer bookId;
 	private String bookName;
 	private Integer bookCategoryId;
 	private Integer bookPrice;
 	private Integer bookPage;
 	private Integer bookCurrentPage;
-	private String bookImg;
+	private String bookImgName;
+	private byte[] bookImg;
 	private Integer bookUserId;
 	private Timestamp createAt;
 	private Timestamp updateAt;
@@ -56,6 +64,18 @@ public class Book {
 	public void setBookCurrentPage(Integer bookCurrentPage) {
 		this.bookCurrentPage = bookCurrentPage;
 	}
+	public String getBookImgName() {
+		return bookImgName;
+	}
+	public void setBookImgName(String bookImgName) {
+		this.bookImgName = bookImgName;
+	}
+	public byte[] getBookImg() {
+		return bookImg;
+	}
+	public void setBookImg(byte[] bookImg) {
+		this.bookImg = bookImg;
+	}
 	public Integer getBookUserId() {
 		return bookUserId;
 	}
@@ -74,19 +94,16 @@ public class Book {
 	public void setUpdateAt(Timestamp updateAt) {
 		this.updateAt = updateAt;
 	}
-	public String getBookImg() {
-		return bookImg;
-	}
-	public void setBookImg(String bookImg) {
-		this.bookImg = bookImg;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 	@Override
 	public String toString() {
 		return "Book [bookId=" + bookId + ", bookName=" + bookName + ", bookCategoryId=" + bookCategoryId
 				+ ", bookPrice=" + bookPrice + ", bookPage=" + bookPage + ", bookCurrentPage=" + bookCurrentPage
-				+ ", bookImg=" + bookImg + ", bookUserId=" + bookUserId + ", createAt=" + createAt + ", updateAt="
-				+ updateAt + "]";
+				+ ", bookImgName=" + bookImgName + ", bookImg=" + Arrays.toString(bookImg) + ", bookUserId="
+				+ bookUserId + ", createAt=" + createAt + ", updateAt=" + updateAt + "]";
 	}
-	
+
 }
