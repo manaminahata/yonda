@@ -50,7 +50,7 @@
         <!-- 遷移先画面リンク -->
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a th:href="@{/yonda/book-registration}" class="nav-link px-2 link-light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">書籍登録</font></font></a></li>
-          <li><a href="#" class="nav-link px-2 link-light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">書籍一覧</font></font></a></li>
+          <li><a th:href="@{/yonda/book-list}" class="nav-link px-2 link-light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">書籍一覧</font></font></a></li>
           <li><a href="#" class="nav-link px-2 link-light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">蔵書検索</font></font></a></li>
           <li><a href="#" class="nav-link px-2 link-light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">お気に入り</font></font></a></li>
         </ul>
@@ -81,7 +81,18 @@
 <form th:action="@{/yonda/user-logout}">
 <button type="submit">ログアウト</button>
 </form>
-<h1>登録完了！</h1>
+
+<!-- 書籍の一覧表示 -->
+<div class="container">
+ <div class="row">
+  <div th:each="book : ${bookList}" class="col">
+   <div th:text="${book.bookName}">書籍名</div>
+   <img th:scr="@{'/Users/manami/workspace/yonda/books/' + ${book.bookImgName}}" class="img-responsive img-rounded item-img-center" width="200">
+  </div>
+ </div>
+</div>
+
+
   <footer class="py-3 my-4">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">ホーム</a></li>
