@@ -50,7 +50,7 @@
         <!-- 遷移先画面リンク -->
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a th:href="@{/yonda/book-registration}" class="nav-link px-2 link-light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">書籍登録</font></font></a></li>
-          <li><a href="#" class="nav-link px-2 link-light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">書籍一覧</font></font></a></li>
+          <li><a th:href="@{/yonda/book-list}" class="nav-link px-2 link-light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">書籍一覧</font></font></a></li>
           <li><a href="#" class="nav-link px-2 link-light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">蔵書検索</font></font></a></li>
           <li><a href="#" class="nav-link px-2 link-light"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">お気に入り</font></font></a></li>
         </ul>
@@ -109,7 +109,7 @@
   </div>
   <div>
    <label for="bookImg" class="text-muted">イメージ画像</label>
-   <input id="bookImg" type="file" class="form-control" name="bookImg" placeholder="書籍のイメージ画像をアップロードしてください" th:field="*{bookImg}" required>
+   <input id="bookImg" type="file" accept="image/*" class="form-control" name="bookImg" placeholder="書籍のイメージ画像をアップロードしてください" th:field="*{bookImg}" required>
   </div>
 
  <button type="submit">登録</button>
