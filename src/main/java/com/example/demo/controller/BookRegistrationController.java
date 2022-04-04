@@ -1,5 +1,8 @@
 package com.example.demo.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
@@ -10,6 +13,7 @@ import java.util.TreeMap;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -80,40 +84,51 @@ public class BookRegistrationController {
 	 * @return
 	 */
 	@RequestMapping("/book-registration-result")
-	public String registerBook(@Validated BookRegistrationForm form, BindingResult result, MultipartFile bookImg, Model model) {
+	public String registerBook(@Validated BookRegistrationForm form, BindingResult result, MultipartFile bookImg, Model model) throws IOException {
 		
+		// バリデーションチェック
 		if (result.hasErrors()) {
 			return registrationBook(model);
 		}
 		
-		// ファイル名を取得
-		MultipartFile bookImgName = form.getBookImg();
+		// 登録された画像データからファイル名を取得
+		String bookImgName = form.getBookImg().getOriginalFilename();
 		
-		// 格納先のパスを指定
-		Path filePath = Paths.get("/Users/manami/workspace/yonda/books/" + bookImgName);
+		System.out.println("ファイル名の確認：");
+		System.out.println(bookImgName);
 		
-		try {
-			// アップロードファイルをバイト値に変換
-			byte[] bytes = bookImg.getBytes();
-			
-			// バイト値を書き込むためのファイルを作成し、指定したパスに格納
-			OutputStream stream = Files.newOutputStream(filePath);
-			
-			// ファイルに書き込み
-			stream.write(bytes);
-		} catch(IOException e) {
-			e.printStackTrace();
-		}
+//		Path filePath = Paths.get("/Users/manami/workspace/yonda/books/" + bookImgName);
+		File filePath = new File(bookImg.getOriginalFilename());
+		
+		// 保存先を定義
+		String uploadPath = "/Users/manami/workspace/yonda/books/";
+		
+		// アップロードファイルをバイト値に変換
+		byte[] bytes = form.getBookImg().getBytes();
+		
+		// バイト値を書き込むためのファイルを作成して指定したパスに格納
+//		OutputStream stream = Files.newOutputStream(filePath);
+		BufferedOutputStream stream = new BufferedOutputStream (
+				new FileOutputStream(new File(uploadPath + filePath)));
+		
+		// ファイルに書き込み
+		stream.write(bytes);
 		
 		Book book = new Book();
+		
+		// formのデータをbookに書き込み
 		BeanUtils.copyProperties(form, book);
 		
 		// sessionに格納されたユーザーデータを利用し、ユーザーのID情報を取得する
 		User user = (User) session.getAttribute("user");
 		book.setBookUserId(user.getUserId());
-		book.setBookImg(form.getBookImg().toString());
 		
-		model.addAttribute("book", book);
+		// 画像の名前
+		book.setBookImgName(bookImgName);
+		// 画像のデータをDBに格納
+		book.setBookImg(Base64.encodeBase64(form.getBookImg().getBytes()));
+		
+		session.setAttribute("book", book);
 		bookRegistrationService.insertBook(book);
 		
 		return "book-list";
